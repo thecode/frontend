@@ -15,6 +15,7 @@ import "./ha-selector-select";
 import "./ha-selector-target";
 import "./ha-selector-text";
 import "./ha-selector-time";
+import "./ha-selector-icon";
 
 @customElement("ha-selector")
 export class HaSelector extends LitElement {
@@ -25,6 +26,8 @@ export class HaSelector extends LitElement {
   @property() public value?: any;
 
   @property() public label?: string;
+
+  @property() public helper?: string;
 
   @property() public placeholder?: any;
 
@@ -47,6 +50,7 @@ export class HaSelector extends LitElement {
         label: this.label,
         placeholder: this.placeholder,
         disabled: this.disabled,
+        helper: this.helper,
         id: "selector",
       })}
     `;

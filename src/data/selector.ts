@@ -10,7 +10,9 @@ export type Selector =
   | ActionSelector
   | StringSelector
   | ObjectSelector
-  | SelectSelector;
+  | SelectSelector
+  | IconSelector;
+
 export interface EntitySelector {
   entity: {
     integration?: string;
@@ -119,8 +121,18 @@ export interface ObjectSelector {
   object: {};
 }
 
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
 export interface SelectSelector {
   select: {
-    options: string[];
+    options: string[] | SelectOption[];
   };
+}
+
+export interface IconSelector {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  icon: {};
 }
