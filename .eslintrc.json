@@ -14,12 +14,12 @@
       "modules": true
     },
     "sourceType": "module",
-    "project": "./frontend/tsconfig.json"
+    "project": "./tsconfig.json"
   },
   "settings": {
     "import/resolver": {
       "webpack": {
-        "config": "./frontend/webpack.config.js"
+        "config": "./webpack.config.js"
       }
     }
   },
