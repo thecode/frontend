@@ -52,7 +52,6 @@ import { haStyle } from "../../../resources/styles";
 import { HomeAssistant, Route } from "../../../types";
 import { documentationUrl } from "../../../util/documentation-url";
 import { showToast } from "../../../util/toast";
-import "../automation/action/ha-automation-action";
 import { HaDeviceAction } from "../automation/action/types/ha-automation-action-device_id";
 import "../ha-config-section";
 import { configSections } from "../ha-panel-config";
@@ -363,11 +362,17 @@ export class HaScriptEditor extends KeyboardShortcutMixin(LitElement) {
                                   )}
                                 </a>
                               </span>
-                              <ha-automation-action
-                                .actions=${this._config.sequence}
-                                @value-changed=${this._sequenceChanged}
+                              <ha-form
                                 .hass=${this.hass}
-                              ></ha-automation-action>
+                                .schema=${[
+                                  {
+                                    name: "sequence",
+                                    selector: { action: {} },
+                                  },
+                                ]}
+                                .data=${this._config}
+                                @value-changed=${this._sequenceChanged}
+                              ></ha-form>
                             </ha-config-section>`}
                       `
                     : ""}
@@ -575,7 +580,10 @@ export class HaScriptEditor extends KeyboardShortcutMixin(LitElement) {
   }
 
   private _sequenceChanged(ev: CustomEvent): void {
-    this._config = { ...this._config!, sequence: ev.detail.value as Action[] };
+    this._config = {
+      ...this._config!,
+      sequence: ev.detail.value.sequence as Action[],
+    };
     this._errors = undefined;
     this._dirty = true;
   }
